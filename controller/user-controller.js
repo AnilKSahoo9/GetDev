@@ -12,9 +12,9 @@ const DUMMY_USERS = [
 }
 ];
 
-const getUsers = (req, res, next) => {
-  res.json({ users: DUMMY_USERS });
-};
+// const getUsers = (req, res, next) => {
+//   res.json({ users: DUMMY_USERS });
+// };
 
 const createUser =(req,res,next)=>{
   const {id,name,email,skill,project}=req.body;
@@ -45,5 +45,5 @@ return next(new HttpError('Could not find a places for the provided userid'));
 
 
 exports.createUser = createUser;
-exports.getUsers = getUsers;
+// exports.getUsers = getUsers;
 exports.getUserByUserId=getUserByUserId;
