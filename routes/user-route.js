@@ -1,6 +1,6 @@
 const express = require('express');
 
-const usersController = require('../controller/user-controller');
+const usersController = require('../controller/userprofile-controller');
 
 const router = express.Router();
 
@@ -9,5 +9,5 @@ const router = express.Router();
 router.post('/', usersController.createUser);
 
 router.get('/:uid',usersController.getUserByUserId);
-
+router.patch('/:uid', usersController.updateUser);
 module.exports = router;
