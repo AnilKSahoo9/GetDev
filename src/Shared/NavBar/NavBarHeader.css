@@ -1,0 +1,14 @@
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    left: 10%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+nav .brand-logo {
+  position: absolute;
+  color: #fff;
+  display: flex;
+  font-size: 2.1rem;
+  padding: 0;
+}

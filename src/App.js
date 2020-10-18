@@ -1,26 +1,33 @@
 import React from 'react';
 import './App.css';
-//import NavBarHeader from './components/header/nav';
-import About from './components/header/about';
-import Contact from './components/header/contact';
-import Home from './components/header/home';
-import Team from './components/header/team';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import NavBarHeader from './components/header/NavBarHeader';
-function App() {
+import About from './Pages/About/About';
+import Contact from './Pages/Contact/Contact';
+import Team from './Pages/Team/Team';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import NavBar from './Shared/NavBar/NavBarHeader';
+import ContainerDashboard from './Pages/ContainerDashboard/ContainerDashboard';
+import PublicRoute from './routes/routes';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Search from '../src/Pages/Search/Search';
+const App = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App">
-        <NavBarHeader />
+        <NavBar />
         <Switch>
-          <Route path="/home" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/team" component={Team} />
+          <Route exact path="/" component={ContainerDashboard}></Route>
+          <Route path="/Home" component={ContainerDashboard}></Route>
+          <Route path="/About" component={About}></Route>
+          <Route path="/Contact" component={Contact}></Route>
+          <Route path="/Team" component={Team}></Route>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <PublicRoute path="/" component={Dashboard} />
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

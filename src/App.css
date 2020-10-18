@@ -1,7 +1,8 @@
 .App {
   text-align: center;
 }
-nav {
+
+/* nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -47,4 +48,4 @@ nav {
 }
 .btn-block {
   display: inline-block;
-}
+} */
