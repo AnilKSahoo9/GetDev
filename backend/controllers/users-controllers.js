@@ -74,7 +74,7 @@ const login = (req, res,next) => {
     
  
     
-
+exports.DUMMY_USERS = DUMMY_USERS
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
