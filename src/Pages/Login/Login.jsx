@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-materialize';
-import './Login.css';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { setUserSession, getToken } from '../../utils/common';
-import Signup from '../Signup/Signup';
+import React, { useState } from "react";
+import { Modal, Button } from "react-materialize";
+import "./Login.css";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { setUserSession, getToken } from "../../utils/common";
+import Signup from "../Signup/Signup";
 export const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
-export const ACCESS_TOKEN_NAME = 'login_access_token';
+export const ACCESS_TOKEN_NAME = "login_access_token";
 
 const Login = (props) => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const history = useHistory();
   const [state, setState] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
     successMessage: null,
     error: null,
     //isAuthenticated: false,
@@ -65,7 +65,7 @@ const Login = (props) => {
     };
     redirectToDashboard();
     axios
-      .post(API_BASE_URL + '/user/login', payload)
+      .post(API_BASE_URL + "/user/login", payload)
       .then((response) => {
         setUserSession(response.data.token, response.data.user);
         //redirectToDashboard();
@@ -87,7 +87,7 @@ const Login = (props) => {
         setState((prevState) => {
           return {
             ...prevState,
-            error: 'Something went wrong. Please try again later.',
+            error: "Something went wrong. Please try again later.",
           };
         });
         console.log(error);
@@ -95,11 +95,11 @@ const Login = (props) => {
   };
 
   const redirectToDashboard = () => {
-    props.history.push('/Dashboard');
+    props.history.push("/Dashboard");
   };
 
   const redirectToSignUp = () => {
-    props.history.push('/signup');
+    props.history.push("/signup");
   };
 
   // if (state.isAuthenticated) {

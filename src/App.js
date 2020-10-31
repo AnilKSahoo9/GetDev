@@ -1,14 +1,16 @@
-import React from 'react';
-import './App.css';
-import About from './Pages/About/About';
-import Contact from './Pages/Contact/Contact';
-import Team from './Pages/Team/Team';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import NavBar from './Shared/NavBar/NavBarHeader';
-import ContainerDashboard from './Pages/ContainerDashboard/ContainerDashboard';
-import PublicRoute from './routes/routes';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Search from '../src/Pages/Search/Search';
+import React from "react";
+import "./App.css";
+import About from "./Pages/About/About";
+import Contact from "./Pages/Contact/Contact";
+import Team from "./Pages/Team/Team";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import NavBar from "./Shared/NavBar/NavBarHeader";
+import ContainerDashboard from "./Pages/ContainerDashboard/ContainerDashboard";
+//import PublicRoute from "./routes/routes";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Search from "./Pages/Search/Search";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -16,14 +18,16 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={ContainerDashboard}></Route>
-          <Route path="/Home" component={ContainerDashboard}></Route>
-          <Route path="/About" component={About}></Route>
-          <Route path="/Contact" component={Contact}></Route>
-          <Route path="/Team" component={Team}></Route>
+          <Route path="/home" component={ContainerDashboard}></Route>
+          <Route path="/about" component={About}></Route>
+          <Route path="/contact" component={Contact}></Route>
+          <Route path="/team" component={Team}></Route>
+          <Route path="/userprofile" component={UserProfile}></Route>
+          <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/search">
             <Search />
           </Route>
-          <PublicRoute path="/" component={Dashboard} />
+          {/* <PublicRoute path="/" component={Dashboard} /> */}
         </Switch>
       </div>
     </BrowserRouter>

@@ -1,0 +1,9 @@
+.main-container{
+    display: flex;
+}
+.request-section{
+    margin: 20px;
+}
+.accept-section{
+    margin: 20px;
+}
