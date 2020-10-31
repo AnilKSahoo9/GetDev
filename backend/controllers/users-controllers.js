@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 //const jwt = require('jsonwebtoken');
 //const bcrypt = require ('bcryptjs');
 
@@ -39,7 +39,7 @@ const signup= (req, res,next) => {;
 
 
     const createdUser = {
-        id: uuid,
+        id: uuid(),
         name,
         email,
         password,
