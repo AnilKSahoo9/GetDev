@@ -1,4 +1,10 @@
-/* .container2 {
-  display: inline-block;
-  width: 40%;
-} */
+.container2 {
+  width: 30%;
+  float: right;
+  /* border: 2px solid lime; */
+  font-size: 40px;
+  padding-top: 130px;
+  /* background: aqua; */
+  background-image: radial-gradient(#1f2833, #0a2351, #0b0c10);
+  height: 100%;
+}

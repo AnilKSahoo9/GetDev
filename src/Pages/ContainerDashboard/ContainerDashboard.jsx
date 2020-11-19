@@ -4,7 +4,7 @@ import Tagline from '../Tagline/Tagline';
 import './ContainerDashboard.css';
 const ContainerDashboard = () => {
   return (
-    <div className="dashboard container">
+    <div className="dashboard_container">
       <Tagline />
       <Login />
     </div>

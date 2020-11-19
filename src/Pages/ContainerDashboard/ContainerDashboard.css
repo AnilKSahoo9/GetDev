@@ -1,5 +1,37 @@
-@media only screen and (min-width: 601px) {
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
   .container {
+    width: 100%;
+    font-size: 18px;
+  }
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .dashboard_container {
+    width: 100%;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .dashboard_container {
+    background-image: url(https://2.bp.blogspot.com/-zHAvNw0O1DU/WAoDImBfOFI/AAAAAAAADt8/WKC7J5PVtAAE2eqCs-dMiugmtbEF_5lwACLcB/s1600/Coding%2Bbackgrounds%2B9.jpg);
+    background-color: #cccccc;
+    height: 600px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .dashboard_container {
+    width: 100%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .dashboard_container {
     width: 100%;
   }
 }

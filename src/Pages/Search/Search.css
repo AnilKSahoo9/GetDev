@@ -1,4 +1,4 @@
-.main {
+/* .main {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,4 +10,10 @@ input {
   width: 300px;
   border-radius: 50px;
   padding: 0px 10px;
+} */
+.search-container {
+  background-image: url(https://www.shutterstock.com/image-illustration/black-background-silhouettes-men-women-focus-1183433839);
+  width: 100%;
+  height: 100%;
+  padding-top: 2px;
 }

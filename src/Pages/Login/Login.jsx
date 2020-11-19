@@ -133,8 +133,9 @@ const Login = (props) => {
           <button className="btn pink lighten-1 z-depth-0">Sign In</button>
         </div>
       </form>
+      
       <div>
-        <a href="">Not an user ? </a>
+        <a href=""><h6>Not an user ? </h6></a>
         <Modal
           header="Sign Up"
           trigger={<Button waves="light">Sign Up</Button>}

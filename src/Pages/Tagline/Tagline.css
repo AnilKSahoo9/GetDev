@@ -1,8 +1,52 @@
-@media only screen and (min-width: 601px) {
+/* @media only screen and (min-width: 601px) {
   .row .col.m8 {
     width: 50%;
   }
 }
 .row {
   width: 40%;
+} */
+.wrap {
+  width: 60%;
+  float: left;
+  padding: 15px;
+  color: rgb(226, 216, 216);
+  /* animation-name: example;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse; */
 }
+
+/* .marquee {
+  white-space: nowrap;
+  -webkit-animation: rightThenLeft 10s linear;
+} */
+/* @keyframes example {
+  0% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+  25% {
+    background-color: yellow;
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    background-color: blue;
+    left: 200px;
+    top: 200px;
+  }
+  75% {
+    background-color: green;
+    left: 0px;
+    top: 200px;
+  }
+  100% {
+    background-color: red;
+    left: 0px;
+    top: 0px;
+  }
+} */
