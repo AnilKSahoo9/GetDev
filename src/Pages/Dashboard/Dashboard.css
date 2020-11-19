@@ -2,8 +2,12 @@
     display: flex;
 }
 .request-section{
-    margin: 20px;
+    margin: 200px;
+    width: 400px;
+    background-color: rgb(136, 136, 61);
 }
 .accept-section{
     margin: 20px;
+    width: 400px;
+    background-color: beige;
 }

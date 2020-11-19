@@ -1,4 +1,5 @@
 import React from "react";
+//import { Container, Row, Col } from "reactstrap";
 import UserList from "../../Shared/User/UserList";
 //import "./Dashboard.css";
 
@@ -22,13 +23,26 @@ const users = [
 
 const Dashboard = () => {
   return (
+    // <Container>
+    //   <Row>
+    //     <Col xs="3">Request Section</Col>
+    //     <Col xs="3">Accept Section</Col>
+    //     <Col xs="3">Chat Section</Col>
+    //   </Row>
+    // </Container>
     <div className="main-container">
       <div className="request-section">
-        <h5>Request Section</h5>
+        <span
+          style={{ marginLeft: "450px", fontSize: "20px", fontWeight: "bold" }}
+        >
+          User's Request Section
+        </span>
         <UserList item={users} />
       </div>
       <div className="accept-section">
-        <h5>AcceptSection</h5>
+        <span style={{ fontSize: "20px", fontWeight: "bold" }}>
+          User's Accept Section
+        </span>
         <UserList item={users} isAcceptSection={true} />
       </div>
       <div className="chat-section"></div>
