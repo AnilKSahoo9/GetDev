@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './Search.css';
+import "./Search.css";
 // const Search = () => {
 //   const [countries, setCountries] = useState([]);
 //   const [loading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ import './Search.css';
 //         >
 //           D'coders youtube channel
 //         </a>
-      
+
 //       <input
 //         type="text"
 //         placeholder="Search Countries"
@@ -69,7 +69,7 @@ import './Search.css';
 //   );
 // };
 import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
-import moment from 'moment';
+//import moment from 'moment';
 import {
   ErrorBoundary,
   Facet,
@@ -80,13 +80,13 @@ import {
   ResultsPerPage,
   Paging,
   Sorting,
-  WithSearch
+  WithSearch,
 } from "@elastic/react-search-ui";
 import {
   BooleanFacet,
   Layout,
   SingleSelectFacet,
-  SingleLinksFacet
+  SingleLinksFacet,
 } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 
@@ -94,20 +94,20 @@ const SORT_OPTIONS = [
   {
     name: "Relevance",
     value: "",
-    direction: ""
+    direction: "",
   },
   {
     name: "Title",
     value: "title",
-    direction: "asc"
-  }
+    direction: "asc",
+  },
 ];
 
 const connector = new AppSearchAPIConnector({
   searchKey: "search-371auk61r2bwqtdzocdgutmg",
   engineName: "search-ui-examples",
   hostIdentifier: "host-2376rb",
-  endpointBase: ""
+  endpointBase: "",
 });
 
 const config = {
@@ -117,18 +117,18 @@ const config = {
       title: {
         snippet: {
           size: 100,
-          fallback: true
-        }
+          fallback: true,
+        },
       },
       nps_link: {
-        raw: {}
+        raw: {},
       },
       description: {
         snippet: {
           size: 100,
-          fallback: true
-        }
-      }
+          fallback: true,
+        },
+      },
     },
     disjunctiveFacets: ["acres", "states"],
     facets: {
@@ -140,8 +140,8 @@ const config = {
           { from: -1, name: "Any" },
           { from: 0, to: 1000, name: "Small" },
           { from: 1001, to: 100000, name: "Medium" },
-          { from: 100001, name: "Large" }
-        ]
+          { from: 100001, name: "Large" },
+        ],
       },
       // location: {
       //   // San Francisco. In the future, make this the user's current position
@@ -185,7 +185,7 @@ const config = {
       //     { from: 10000001, name: "10000001+" }
       //   ]
       // }
-    }
+    },
   },
   autocompleteQuery: {
     results: {
@@ -194,24 +194,24 @@ const config = {
         title: {
           snippet: {
             size: 100,
-            fallback: true
-          }
+            fallback: true,
+          },
         },
         nps_link: {
-          raw: {}
-        }
-      }
+          raw: {},
+        },
+      },
     },
     suggestions: {
       types: {
         documents: {
-          fields: ["title", "description"]
-        }
+          fields: ["title", "description"],
+        },
       },
-      size: 4
-    }
+      size: 4,
+    },
   },
-  apiConnector: connector
+  apiConnector: connector,
 };
 
 export default function App() {
@@ -233,7 +233,7 @@ export default function App() {
                         titleField: "title",
                         urlField: "nps_link",
                         shouldTrackClickThrough: true,
-                        clickThroughTags: ["test"]
+                        clickThroughTags: ["test"],
                       }}
                       autocompleteSuggestions={true}
                       debounceLength={0}
