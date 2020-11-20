@@ -1,7 +1,4 @@
 const uuid = require('uuid').v4;
-//const jwt = require('jsonwebtoken');
-//const bcrypt = require ('bcryptjs');
-
 const HttpError = require('../models/http-error');
 const user = require('../models/users.js');
 const DUMMY_USERS =[
@@ -26,18 +23,17 @@ const DUMMY_USERS =[
 ]
     }
 ];
+
 const getUsers = (req, res,next) => {
     res.json({users:DUMMY_USERS});
 };
 
-
+// signup user
 const signup= async(req, res,next) => {;
     
     const{ name,email, password,gender,bio,location,work_profile,github,linkedin,skill,project} = req.body;
 
-    //const hasUser =DUMMY_USERS.find(u => u.email === email);
-    //throw new HttpError('could not identify user , credentilas seem to be wrong.',422);
-    let existingUser
+    let existingUser;
     try{
          existingUser = await user.findOne({ email:email})
     }
@@ -88,6 +84,7 @@ const signup= async(req, res,next) => {;
     res.status(201).json({user: createdUser});
 };
 
+//login
 const login = async(req, res,next) => {
     const {email,password} = req.body;
     let existingUser;
@@ -110,11 +107,7 @@ const login = async(req, res,next) => {
         
         }
 
-//    const identifierdUser = DUMMY_USERS.find( u => u.email === email);
-//     if (!identifierdUser || identifierdUser.password !==password){
-//        throw new HttpError('could not identify user , credentilas seem to be wrong.',401)
-//     }
-    
+
     res.json({message: 'Logged in!'});
 };
 

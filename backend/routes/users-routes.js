@@ -16,5 +16,5 @@ router.post('/login',usersControllers.login);
 
 router.get('/:uid',userProfileControllers.getUserByUserId);
 
-router.patch('/:uid', userProfileControllers.updateUser);
+// router.patch('/:uid', userProfileControllers.updateUser);
 module.exports = router;
