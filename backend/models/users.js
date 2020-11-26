@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt= require('bcryptjs');
 //const Schema = mongoose.Schema;
 var usersSchema = new mongoose.Schema({
     //_id: mongoose.Schema.Types.ObjectId,
@@ -14,4 +15,13 @@ var usersSchema = new mongoose.Schema({
     skill:{ type :Array,required:true},// [ String, String, String],
     project:{ type :Array,required:true}//[{String}, {String}],
 });
+//used  for the password encryption...
+// usersSchema.pre("save", async function(next){
+//     if(this.isModified("password")){
+//         console.log(`The current password is ${this.password}`);
+//         this.password=await bcrypt.hash(this.password,10);
+//         console.log(`The hashed password is ${this.password}`);
+//     }
+//     next();
+// })
 module.exports = mongoose.model('users', usersSchema);
