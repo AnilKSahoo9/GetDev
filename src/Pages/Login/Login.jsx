@@ -12,7 +12,7 @@ export const ACCESS_TOKEN_NAME = "login_access_token";
 const Login = (props) => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
-  const history = useHistory();
+  //const history = useHistory();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -63,12 +63,45 @@ const Login = (props) => {
       email: state.email,
       password: state.password,
     };
-    redirectToDashboard();
+    // fetch(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    //   //credentials: "include",
+    //   body: JSON.stringify(payload),
+    // })
+    //   .then((res) => res.json())
+    //   .then((response) => {
+    //     // Handle response
+    //     if (response.status === 200) {
+    //       alert("success");
+    //     }
+    //     console.log("Response: ", response);
+    //   })
+    //   .catch((error) => {
+    //     // Handle error
+    //     console.log("Error message: ", error);
+    //   });
+    //redirectToDashboard();
     axios
-      .post(API_BASE_URL + "/user/login", payload)
+      .post(
+        `http://localhost:4000/api/users/login`,
+        //JSON.stringify(payload),
+        payload,
+        {
+          header: {
+            "Content-type":
+              "application/json,application/x-www-form-urlencoded, charset=UTF-8",
+          },
+        }
+      )
       .then((response) => {
-        setUserSession(response.data.token, response.data.user);
-        //redirectToDashboard();
+        console.log(response);
+        if (response.status === 200) {
+          redirectToDashboard();
+        }
+        //setUserSession(response.data.token, response.data.user);
         // if (response.status === 200) {
         //   setState((prevState) => ({
         //     ...prevState,
@@ -108,7 +141,10 @@ const Login = (props) => {
   // }
   return (
     <div className="container2">
-      <form onSubmit={handleSubmit} className="white">
+      <form
+        onSubmit={state.email && state.password && handleSubmit}
+        className="white"
+      >
         <h5 className="grey-text.text-darken-3">Sign In</h5>
         <div className="input-field">
           <i class="material-icons prefix">mail_outline</i>
@@ -133,9 +169,11 @@ const Login = (props) => {
           <button className="btn pink lighten-1 z-depth-0">Sign In</button>
         </div>
       </form>
-      
+
       <div>
-        <a href=""><h6>Not an user ? </h6></a>
+        <a href="">
+          <h6>Not an user ? </h6>
+        </a>
         <Modal
           header="Sign Up"
           trigger={<Button waves="light">Sign Up</Button>}

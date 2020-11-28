@@ -1,7 +1,10 @@
-import React from "react";
+//import axios from "axios";
+import React, { useState, useEffect } from "react";
 //import { Container, Row, Col } from "reactstrap";
 import UserList from "../../Shared/User/UserList";
+//import { getUser } from "../../utils/common";
 //import "./Dashboard.css";
+//export const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 const users = [
   {
@@ -22,14 +25,24 @@ const users = [
 ];
 
 const Dashboard = () => {
+  // const [reqUser, setReqUser] = useState(null);
+  // const [acceptUser, setAcceptUser] = useState(null);
+  // const emailId = getUser();
+
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     axios
+  //       .get(API_BASE_URL + "/user/login", { userId: emailId })
+  //       .then((res) => {
+  //         setReqUser(res.data.reuest_section);
+  //         setAcceptUser(res.data.accept_section);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   };
+  //   emailId && fetchData();
+  // }, [emailId]);
+
   return (
-    // <Container>
-    //   <Row>
-    //     <Col xs="3">Request Section</Col>
-    //     <Col xs="3">Accept Section</Col>
-    //     <Col xs="3">Chat Section</Col>
-    //   </Row>
-    // </Container>
     <div className="main-container">
       <div className="request-section">
         <span
@@ -51,13 +64,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// import React from 'react';
-// const Dashboard = () => {
-//   return (
-//     <div>
-//       <h5>hi,,sweta...welcome to the world of devs welcome to the dashboard</h5>
-//     </div>
-//   );
-// };
-// export default Dashboard;

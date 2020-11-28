@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import image from "../../assets/Mahi.jpg";
+//import "./NavBarUL.css";
 const NavBarUL = () => {
   // const history = useHistory();
   // let path =
@@ -19,13 +20,14 @@ const NavBarUL = () => {
       <li>
         <NavLink to="/team">Team</NavLink>
       </li>
-      <li>
+      {/* <li>
         <img
           style={{ borderRadius: "50%", width: "40px", margin: "10px" }}
           src={image}
           alt="Ankur"
+          className="profile"
         />
-      </li>
+      </li> */}
     </ul>
   );
 };
