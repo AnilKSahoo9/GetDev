@@ -24,7 +24,7 @@ app.use((error, req, res, next) => {
 
 });
 
-mongoose.connect('mongodb+srv://arati14:arati123@cluster0.hxxf6.mongodb.net/getdev?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://Devdatabase:GetDevconnection@cluster0.b9nxv.mongodb.net/GetDevs?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

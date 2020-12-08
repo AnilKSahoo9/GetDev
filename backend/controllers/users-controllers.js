@@ -102,7 +102,7 @@ const login = async(req, res,next) => {
     }
     catch(err){
         const error=new HttpError(
-            'logging  in failed, please try again later.',
+            'logging  in failed, please try again .',
             202
         );
         return next(error); 
