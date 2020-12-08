@@ -1,31 +1,40 @@
 const uuid = require('uuid').v4;
 const HttpError = require('../models/http-error');
 const user = require('../models/users.js');
-const DUMMY_USERS =[
-    {
-   id: 'u1',
-   name: 'nirjharini swain' ,
-   email: 'swainrupali5@gmail.com',
-   password:'rupali',
-    gender:'female',
-    bio:'i m a it professional',
-    location:'Cuttack',
-    work_profile:'full stack',
-    github:'rupali1234880.github.io',
-    linkedin:'nirjharini.linkedin.io',
-    skill:['java','c','c++'],
-   project:[{
-     name:'game',
-     description:'simple game'
-   },
-   {name:'github page',
-  description:"to fetch all github user details"}
-]
-    }
-];
+// const DUMMY_USERS =[
+//     {
+//    id: 'u1',
+//    name: 'nirjharini swain' ,
+//    email: 'swainrupali5@gmail.com',
+//    password:'rupali',
+//     gender:'female',
+//     bio:'i m a it professional',
+//     location:'Cuttack',
+//     work_profile:'full stack',
+//     github:'rupali1234880.github.io',
+//     linkedin:'nirjharini.linkedin.io',
+//     skill:['java','c','c++'],
+//    project:[{
+//      name:'game',
+//      description:'simple game'
+//    },
+//    {name:'github page',
+//   description:"to fetch all github user details"}
+// ]
+//     }
+// ];
 
-const getUsers = (req, res,next) => {
-    res.json({users:DUMMY_USERS});
+const getUsers = async(req, res,next) => {
+  let users;
+  try{
+      users= await user.find({},'-password');
+  }catch(err){
+      const error = new HttpError(
+          'Fetching users failed,please try again later',500
+      );
+      return next(error);
+  };
+  res.json({users:users.map(User => User.toObject({getters:true}))});
 };
 
 // signup user
@@ -74,7 +83,7 @@ const signup= async(req, res,next) => {;
          await createdUser.save();
     }catch(err){
         const error=new HttpError(
-            'creating place failed, please try again.',
+            'creating user failed, please try again.',
             500
         );
         return next(error); 
