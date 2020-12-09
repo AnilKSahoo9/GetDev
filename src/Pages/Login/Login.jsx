@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-materialize";
+//import { Modal, Button } from "react-materialize";
 import "./Login.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -174,12 +174,12 @@ const Login = (props) => {
         <a href="">
           <h6>Not an user ? </h6>
         </a>
-        <Modal
-          header="Sign Up"
+        {/* <Modal
+          //header="Sign Up"
           trigger={<Button waves="light">Sign Up</Button>}
         >
           <Signup />
-        </Modal>
+        </Modal> */}
       </div>
     </div>
   );

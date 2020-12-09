@@ -10,6 +10,7 @@ import ContainerDashboard from "./Pages/ContainerDashboard/ContainerDashboard";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Search from "./Pages/Search/Search";
 import UserProfile from "./Pages/UserProfile/UserProfile";
+import SignUp from "./Pages/Signup/Signup";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/team" component={Team}></Route>
           <Route path="/userprofile" component={UserProfile}></Route>
           <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/signup" component={SignUp}></Route>
           <Route path="/search">
             <Search />
           </Route>
