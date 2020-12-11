@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 //import ReactDOM from "react-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -62,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 395,
     //maxWidth: 300,
   },
+  gender: {
+    margin: theme.spacing(1),
+    minWidth: 395,
+  },
   work: {
     //margin: theme.spacing(0),
     minWidth: 190,
@@ -121,14 +126,16 @@ export default function SignUp() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    age: "",
+    //age: "",
     gender: "",
-    workProfile: "",
+    work_profile: "",
     bio: "",
     location: "",
     github: "",
     linkedin: "",
     password: "",
+  });
+  const [project, setProject] = useState({
     projectName: "",
     projectDesc: "",
   });
@@ -144,10 +151,30 @@ export default function SignUp() {
     }));
   }, []);
 
-  const handleChange = (event) => {
+  const handleSkillChange = (event) => {
     setSkill(event.target.value);
   };
 
+  const handleProjectChange =
+    //useCallback(
+    (event) => {
+      event.persist();
+      let name = event.target.name;
+      let value = event.target.value;
+      setProject((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+      //let finalForm = {};
+      form.skill = skill;
+      form.project = project;
+      console.log(form);
+      // for (let x in form) {
+      //   finalForm[x] = form[x];
+      // }
+    };
+  //   [form, project, skill]
+  // );
   // useEffect(() => {
   //   setAddProject(false);
   // const addProjectFunc = () => {
@@ -184,23 +211,35 @@ export default function SignUp() {
   // };
   //   addProjectFunc();
   // }, []);
-  const submitHandler = useCallback(() => {
-    let finalForm = {};
-    form.skills = skill;
-    for (let x in form) {
-      finalForm[x] = form[x];
-    }
-    if (Object.values(finalForm).includes(null)) {
-      alert("missed");
-      // finalForm = form;
-      // console.log(finalForm);
-    } else {
-      alert("success");
-      console.log(finalForm);
-    }
+  const submitHandler = (event) => {
+    //useCallback(() => {
+    event.preventDefault();
 
-    //console.log(skill);
-  }, [form, skill]);
+    // if (Object.values(finalForm).includes(null)) {
+    //   alert("missed");
+    //   // finalForm = form;
+    //   // console.log(finalForm);
+    // } else {
+    //alert("success");
+    console.log(form);
+
+    axios
+      .post(`http://localhost:4000/api/users/signup`, form, {
+        header: {
+          "Content-type":
+            "application/json,application/x-www-form-urlencoded, charset=UTF-8",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert("success");
+      })
+      .catch((err) => console.log(err));
+    //}
+  };
+
+  //console.log(skill);
+  //}, [form, skill, project]);
 
   const handleProject = () => {
     setAddProject(true);
@@ -218,12 +257,13 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={submitHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
                 name="name"
+                type="name"
                 variant="outlined"
                 required
                 fullWidth
@@ -240,26 +280,28 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
+                type="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 onChange={inputHandler}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id="age"
+                type="number"
                 label="Age"
                 name="age"
                 autoComplete="age"
                 onChange={inputHandler}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.work}>
+            </Grid> */}
+            <Grid item xs={12}>
+              <FormControl variant="outlined" className={classes.gender}>
                 <InputLabel id="demo-simple-select-outlined-label">
                   Gender
                 </InputLabel>
@@ -292,17 +334,17 @@ export default function SignUp() {
                   //onChange={handleChange}
                   label="Work Profile"
                   onChange={inputHandler}
-                  name="workProfile"
+                  name="work_profile"
                   //fullWidth
                 >
                   {/* <MenuItem value=""><em>None</em></MenuItem> */}
-                  <MenuItem value={"Full Stack Developer"}>
+                  <MenuItem value="Full Stack Developer">
                     Full Stack Developer
                   </MenuItem>
-                  <MenuItem value={"Frontend Developer"}>
+                  <MenuItem value="Frontend Developer">
                     Frontend Developer
                   </MenuItem>
-                  <MenuItem value={"Backend Developer"}>
+                  <MenuItem value="Backend Developer">
                     Backend Developer
                   </MenuItem>
                 </Select>
@@ -315,6 +357,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="location"
+                type="text"
                 label="Location"
                 name="location"
                 autoComplete="location"
@@ -327,6 +370,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="bio"
+                type="text"
                 label="Enter Bio"
                 name="bio"
                 autoComplete="bio"
@@ -340,6 +384,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="github"
+                type="text"
                 label="GitHub Url"
                 name="github"
                 autoComplete="github"
@@ -352,6 +397,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="linkedin"
+                type="text"
                 label="LinkedIn Url"
                 name="linkedin"
                 autoComplete="linkedin"
@@ -384,7 +430,7 @@ export default function SignUp() {
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
                 value={skill}
-                onChange={handleChange}
+                onChange={handleSkillChange}
                 label="Skills"
                 multiple
                 required
@@ -416,9 +462,10 @@ export default function SignUp() {
                     id="projectName"
                     label="Project Name"
                     name="projectName"
+                    type="text"
                     autoComplete="projectName"
                     style={{ width: "395px" }}
-                    onChange={inputHandler}
+                    onChange={handleProjectChange}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -429,9 +476,10 @@ export default function SignUp() {
                     id="projectDesc"
                     label="Project Description"
                     name="projectDesc"
+                    type="text"
                     autoComplete="projectDesc"
                     style={{ width: "395px" }}
-                    onChange={inputHandler}
+                    onChange={handleProjectChange}
                   />
                 </Grid>
               </Grid>
@@ -459,7 +507,8 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={submitHandler}
+            onSubmit={submitHandler}
+            //onClick={submitHandler}
           >
             Sign Up
           </Button>
