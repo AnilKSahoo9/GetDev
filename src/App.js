@@ -19,10 +19,10 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={ContainerDashboard}></Route>
-          <Route path="/home" component={ContainerDashboard}></Route>
+          {/* <Route path="/home" component={ContainerDashboard}></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/contact" component={Contact}></Route>
-          <Route path="/team" component={Team}></Route>
+          <Route path="/team" component={Team}></Route> */}
           <Route path="/userprofile" component={UserProfile}></Route>
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/signup" component={SignUp}></Route>

@@ -118,7 +118,7 @@ function getStyles(name, skill, theme) {
   };
 }
 
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
   const [skill, setSkill] = useState([]);
   const theme = useTheme();
@@ -135,10 +135,10 @@ export default function SignUp() {
     linkedin: "",
     password: "",
   });
-  const [project, setProject] = useState({
+  const [project, setProject] = useState([{
     projectName: "",
     projectDesc: "",
-  });
+  }]);
 
   const inputHandler = useCallback((event) => {
     event.persist();
@@ -168,7 +168,7 @@ export default function SignUp() {
       //let finalForm = {};
       form.skill = skill;
       form.project = project;
-      console.log(form);
+      //console.log(form);
       // for (let x in form) {
       //   finalForm[x] = form[x];
       // }
@@ -214,14 +214,14 @@ export default function SignUp() {
   const submitHandler = (event) => {
     //useCallback(() => {
     event.preventDefault();
-
+alert("clicked")
     // if (Object.values(finalForm).includes(null)) {
     //   alert("missed");
     //   // finalForm = form;
     //   // console.log(finalForm);
     // } else {
     //alert("success");
-    console.log(form);
+    //console.log(form);
 
     axios
       .post(`http://localhost:4000/api/users/signup`, form, {
@@ -232,7 +232,14 @@ export default function SignUp() {
       })
       .then((res) => {
         console.log(res);
-        alert("success");
+        //alert("success");
+        // if(res.status === 201){
+        //   props.history.push("/signup");
+        // }
+        // else if(res.status === 500){
+        //   alert(" user already exists");
+        // }
+        
       })
       .catch((err) => console.log(err));
     //}
@@ -257,7 +264,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler}>
+        <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -338,7 +345,7 @@ export default function SignUp() {
                   //fullWidth
                 >
                   {/* <MenuItem value=""><em>None</em></MenuItem> */}
-                  <MenuItem value="Full Stack Developer">
+                  <MenuItem value="Full Stack Developer" onChange={inputHandler}>
                     Full Stack Developer
                   </MenuItem>
                   <MenuItem value="Frontend Developer">
@@ -507,8 +514,8 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onSubmit={submitHandler}
-            //onClick={submitHandler}
+            //onSubmit={submitHandler}
+            onClick={submitHandler}
           >
             Sign Up
           </Button>
