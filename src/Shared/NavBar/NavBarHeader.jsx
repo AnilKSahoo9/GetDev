@@ -1,8 +1,11 @@
-import React from 'react';
- import { Link ,NavLink} from 'react-router-dom';
+import React from "react";
+import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
+import logo from "../../assets/Getdev (1).png";
 // import NavBarUL from './NavBarUL';
-import About from '../../Pages/About/About';
-import './NavBarHeader.css';
+// import About from "../../Pages/About/About";
+// import ContainerDashboard from "../../Pages/ContainerDashboard/ContainerDashboard";
+
+import "./NavBarHeader.css";
 import {
   AppBar,
   Toolbar,
@@ -10,67 +13,107 @@ import {
   List,
   ListItem,
   ListItemText,
-  Container
+  Container,
 } from "@material-ui/core";
-import { Home, PinDropSharp } from "@material-ui/icons";
+// import { Home, PinDropSharp } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+// import Team from "../../Pages/Team/Team";
+// import Contact from "../../Pages/Contact/Contact";
 
 const useStyles = makeStyles({
   navbarDisplayFlex: {
     display: `flex`,
-    justifyContent: `space-between`
+    justifyContent: `space-between`,
   },
   navDisplayFlex: {
     display: `flex`,
-    justifyContent: `space-between`
+    justifyContent: `space-between`,
   },
   linkText: {
     textDecoration: `none`,
     //textTransform: `uppercase`,
-    color: `white`
+    color: `white`,
   },
   logo: {
-         maxWidth: 160,
-       },
+    maxWidth: 10,
+  },
 });
 
 const navLinks = [
-  {title: `Home`, path: `/home`},
-  { title: `About`, path: `/about-us`,component: About },
-  { title: `Contact`, path: `/contact` },
-  { title: `Team`, path: `/team` },
+  { title: `Home`, path: `/` },
+  { title: `About`, path: `/about` },
+  { title: `Contact Us`, path: `/contact-us` },
+  { title: `Our Team`, path: `/ourteam` },
 ];
 
 const NavBar = () => {
-    const classes = useStyles();
-    
-    return (
-      <AppBar position="static">
-        <Toolbar>
-        
-          <Container maxWidth="xl" className={classes.navbarDisplayFlex}>
-          <img src="logo.png" alt="logo" className={classes.logo} />
-            {/* <IconButton edge="start" color="inherit" aria-label="home">
+  const classes = useStyles();
+  // const location = useLocation();
+  const history = useHistory();
+
+  // let path =
+  //   location.pathname === "/dashboard" ||
+  //   location.pathname === "/search" ||
+  //   location.pathname === "/userprofile";
+
+  return (
+    <AppBar position="static" style={{ backgroundColor: "#006666" }}>
+      <Toolbar>
+        <Container maxWidth="xl" className={classes.navbarDisplayFlex}>
+          <div
+            //className={`logo`}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+            }}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <img
+              src={logo}
+              alt="GetDev"
+              style={{
+                height: "60px",
+                width: "90px",
+                cursor: "pointer",
+              }}
+            />
+          </div>
+
+          {/* <img src={logo} alt="GetDev" className={classes.logo} /> */}
+          {/* <IconButton edge="start" color="inherit" aria-label="home">
               <Home fontSize="large" />
             </IconButton> */}
-            <List
-              component="nav"
-              aria-labelledby="main navigation"
-              className={classes.navDisplayFlex}
-            >
-              {navLinks.map(({ title, path }) => (
-                <NavLink to={path} key={title} className={classes.linkText} >
-                  <ListItem button
-                            component={Link} to={path}>
-                    <ListItemText primary={title} />
-                  </ListItem>
-                </NavLink>
-              ))}
-            </List>
-          </Container>
-        </Toolbar>
-      </AppBar>
-    );
+          <List
+            component="nav"
+            aria-labelledby="main navigation"
+            className={classes.navDisplayFlex}
+          >
+            {navLinks.map(({ title, path }) => (
+              <NavLink to={path} key={title} className={classes.linkText}>
+                <ListItem button component={Link} to={path}>
+                  <ListItemText primary={title} />
+                </ListItem>
+              </NavLink>
+            ))}
+            {/* {path && (
+              <ListItem onClick={() => history.push("/")}>
+                <ListItemText primary="SignOut" />
+              </ListItem>
+            )} */}
+            {/* {history.location.pathname === "/" && (
+              <ListItem onClick={() => history.push("/")}>
+                <ListItemText primary="SignOut" />
+              </ListItem>
+            )} */}
+          </List>
+        </Container>
+      </Toolbar>
+    </AppBar>
+  );
   // return (
   //   <nav className="nav-wrapper blue-grey darken-4">
   //     <div className="container">

@@ -14,9 +14,9 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .dashboard_container {
-    background-image: url(https://2.bp.blogspot.com/-zHAvNw0O1DU/WAoDImBfOFI/AAAAAAAADt8/WKC7J5PVtAAE2eqCs-dMiugmtbEF_5lwACLcB/s1600/Coding%2Bbackgrounds%2B9.jpg);
+    background-image: url(../../assets/Transforming\ Ideas\ into\ Reality.png);
     background-color: #cccccc;
-    height: 600px;
+    height: 657px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

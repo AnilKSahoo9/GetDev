@@ -11,7 +11,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Search from "./Pages/Search/Search";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import SignUp from "./Pages/Signup/Signup";
-
+import User from "./Pages/UserProfile/UserPro";
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,11 +19,12 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={ContainerDashboard}></Route>
-          {/* <Route path="/home" component={ContainerDashboard}></Route>
+          {/* <Route path="/home" component={ContainerDashboard}></Route> */}
           <Route path="/about" component={About}></Route>
-          <Route path="/contact" component={Contact}></Route>
-          <Route path="/team" component={Team}></Route> */}
+          <Route path="/contact-us" component={Contact}></Route>
+          <Route path="/ourteam" component={Team}></Route>
           <Route path="/userprofile" component={UserProfile}></Route>
+          <Route path="/userpro" component={User}></Route>
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/search">

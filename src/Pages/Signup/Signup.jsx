@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-//import ReactDOM from "react-dom";
+import Swal from "sweetalert2";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -26,7 +26,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="/">
         GetDev
       </Link>{" "}
       {new Date().getFullYear()}
@@ -37,7 +37,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(0),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    minWidth: 395,
+    minWidth: 700,
     //marginLeft: theme.spacing(30),
   },
   submit: {
@@ -60,16 +60,19 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 395,
+    minWidth: 340,
     //maxWidth: 300,
   },
   gender: {
     margin: theme.spacing(1),
-    minWidth: 395,
+    minWidth: 340,
+    marginLeft: 0,
   },
   work: {
     //margin: theme.spacing(0),
-    minWidth: 190,
+    minWidth: 340,
+    marginLeft: 0,
+    marginTop: 8,
   },
   input: {
     textIndent: theme.spacing(2),
@@ -106,7 +109,6 @@ const skills = [
   "Kotlin",
   "React.js",
   "Angular.js",
-  "",
 ];
 
 function getStyles(name, skill, theme) {
@@ -135,10 +137,10 @@ export default function SignUp(props) {
     linkedin: "",
     password: "",
   });
-  const [project, setProject] = useState([{
+  const [project, setProject] = useState({
     projectName: "",
     projectDesc: "",
-  }]);
+  });
 
   const inputHandler = useCallback((event) => {
     event.persist();
@@ -165,9 +167,13 @@ export default function SignUp(props) {
         ...prev,
         [name]: value,
       }));
+      //setProject((prev) => [...prev, { ...prev[0], [name]: value }]);
+      //   {
+      //   ...prev,
+      //   [name]: value,
+      // }));
       //let finalForm = {};
-      form.skill = skill;
-      form.project = project;
+
       //console.log(form);
       // for (let x in form) {
       //   finalForm[x] = form[x];
@@ -175,46 +181,13 @@ export default function SignUp(props) {
     };
   //   [form, project, skill]
   // );
-  // useEffect(() => {
-  //   setAddProject(false);
-  // const addProjectFunc = () => {
-  //   return (
-  //     <div className={classes.form}>
-  //       <Grid container spacing={2}>
-  //         <Grid item xs={12}>
-  //           <TextField
-  //             variant="outlined"
-  //             required
-  //             //fullWidth
-  //             id="projectName"
-  //             label="Project Name"
-  //             name="projectName"
-  //             autoComplete="projectName"
-  //             style={{ width: "395px" }}
-  //           />
-  //         </Grid>
-  //         <Grid item xs={12}>
-  //           <TextField
-  //             variant="outlined"
-  //             required
-  //             //fullWidth
-  //             id="projectDesc"
-  //             label="Project Description"
-  //             name="projectDesc"
-  //             autoComplete="projectDesc"
-  //             style={{ width: "395px" }}
-  //           />
-  //         </Grid>
-  //       </Grid>
-  //     </div>
-  //   );
-  // };
-  //   addProjectFunc();
-  // }, []);
+
   const submitHandler = (event) => {
     //useCallback(() => {
+    form.skill = skill;
+    form.project = project;
     event.preventDefault();
-alert("clicked")
+    //alert("clicked");
     // if (Object.values(finalForm).includes(null)) {
     //   alert("missed");
     //   // finalForm = form;
@@ -232,6 +205,16 @@ alert("clicked")
       })
       .then((res) => {
         console.log(res);
+        if (res.request.status === 201) {
+          Swal.fire({
+            icon: "success",
+            title: "",
+            text: "User registered successfully",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          //.then(() => (window.location = "/login"));
+        }
         //alert("success");
         // if(res.status === 201){
         //   props.history.push("/signup");
@@ -239,10 +222,34 @@ alert("clicked")
         // else if(res.status === 500){
         //   alert(" user already exists");
         // }
-        
       })
-      .catch((err) => console.log(err));
-    //}
+      .catch((err) => {
+        console.log(err);
+        if (err.response.request.status === 202) {
+          //alert("Account with this email already exists.");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Signing up failed, please try again later",
+          });
+        }
+        if (err.response.request.status === 422) {
+          //alert("Account with this email already exists.");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "User already exists, please Sign In instead",
+          });
+        }
+        if (err.response.request.status === 500) {
+          //alert("Account with this email already exists.");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Can't create the account, try again after some time",
+          });
+        }
+      });
   };
 
   //console.log(skill);
@@ -262,11 +269,11 @@ alert("clicked")
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign Up
         </Typography>
         <form className={classes.form}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="name"
@@ -281,7 +288,7 @@ alert("clicked")
                 onChange={inputHandler}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -307,7 +314,7 @@ alert("clicked")
                 onChange={inputHandler}
               />
             </Grid> */}
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <FormControl variant="outlined" className={classes.gender}>
                 <InputLabel id="demo-simple-select-outlined-label">
                   Gender
@@ -345,7 +352,10 @@ alert("clicked")
                   //fullWidth
                 >
                   {/* <MenuItem value=""><em>None</em></MenuItem> */}
-                  <MenuItem value="Full Stack Developer" onChange={inputHandler}>
+                  <MenuItem
+                    value="Full Stack Developer"
+                    onChange={inputHandler}
+                  >
                     Full Stack Developer
                   </MenuItem>
                   <MenuItem value="Frontend Developer">
@@ -371,7 +381,7 @@ alert("clicked")
                 onChange={inputHandler}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -385,7 +395,7 @@ alert("clicked")
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -398,7 +408,7 @@ alert("clicked")
                 onChange={inputHandler}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -411,7 +421,7 @@ alert("clicked")
                 onChange={inputHandler}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -460,36 +470,38 @@ alert("clicked")
               </Select>
             </FormControl>
             {addProject && (
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    //fullWidth
-                    id="projectName"
-                    label="Project Name"
-                    name="projectName"
-                    type="text"
-                    autoComplete="projectName"
-                    style={{ width: "395px" }}
-                    onChange={handleProjectChange}
-                  />
+              <div className={classes.formControl}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      //fullWidth
+                      id="projectName"
+                      label="Project Name"
+                      name="projectName"
+                      type="text"
+                      autoComplete="projectName"
+                      style={{ width: "342px" }}
+                      onChange={handleProjectChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      //fullWidth
+                      id="projectDesc"
+                      label="Project Description"
+                      name="projectDesc"
+                      type="text"
+                      autoComplete="projectDesc"
+                      style={{ width: "342px" }}
+                      onChange={handleProjectChange}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    //fullWidth
-                    id="projectDesc"
-                    label="Project Description"
-                    name="projectDesc"
-                    type="text"
-                    autoComplete="projectDesc"
-                    style={{ width: "395px" }}
-                    onChange={handleProjectChange}
-                  />
-                </Grid>
-              </Grid>
+              </div>
             )}
             <Button
               //type="submit"
@@ -521,7 +533,7 @@ alert("clicked")
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

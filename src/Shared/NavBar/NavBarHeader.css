@@ -1,14 +1,28 @@
 @media only screen and (max-width: 992px) {
-  nav .brand-logo {
+  .logo {
+    background-image: url(../../assets/Getdev.png);
+    min-width: 70px;
+    background-repeat: no-repeat;
+    width: 10%;
+    height: 100%;
+    background-size: contain;
+    cursor: pointer;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  /* nav .brand-logo {
     left: 10%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-  }
+  } */
 }
-nav .brand-logo {
+/* nav .brand-logo {
   position: absolute;
   color: #fff;
   display: flex;
   font-size: 2.1rem;
   padding: 0;
-}
+} */

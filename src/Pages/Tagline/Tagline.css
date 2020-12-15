@@ -8,9 +8,10 @@
 } */
 .wrap {
   width: 60%;
-  float: left;
-  padding: 15px;
-  color: rgb(226, 216, 216);
+  float: center;
+  padding: 30px;
+  color: rgb(100, 8, 8);
+  margin: 200px 30px 30px 170px;
   /* animation-name: example;
   animation-duration: 5s;
   animation-timing-function: linear;
