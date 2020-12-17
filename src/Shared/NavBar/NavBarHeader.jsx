@@ -45,16 +45,22 @@ const navLinks = [
   { title: `Contact Us`, path: `/contact-us` },
   { title: `Our Team`, path: `/ourteam` },
 ];
+const afterLogin = [
+  { title: `Dashboard`, path: `/dashboard` },
+  { title: `Search Developers`, path: `/search` },
+  { title: `User Profile`, path: `/userprofile` },
+  { title: `Logout`, path: `/` },
+];
 
 const NavBar = () => {
   const classes = useStyles();
   // const location = useLocation();
   const history = useHistory();
 
-  // let path =
-  //   location.pathname === "/dashboard" ||
-  //   location.pathname === "/search" ||
-  //   location.pathname === "/userprofile";
+  let path =
+    history.location.pathname === "/dashboard" ||
+    history.location.pathname === "/search" ||
+    history.location.pathname === "/userprofile";
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#006666" }}>
@@ -104,11 +110,14 @@ const NavBar = () => {
                 <ListItemText primary="SignOut" />
               </ListItem>
             )} */}
-            {/* {history.location.pathname === "/" && (
-              <ListItem onClick={() => history.push("/")}>
-                <ListItemText primary="SignOut" />
-              </ListItem>
-            )} */}
+            {path &&
+              afterLogin.map(({ title, path }) => (
+                <NavLink to={path} key={title} className={classes.linkText}>
+                  <ListItem button component={Link} to={path}>
+                    <ListItemText primary={title} />
+                  </ListItem>
+                </NavLink>
+              ))}
           </List>
         </Container>
       </Toolbar>

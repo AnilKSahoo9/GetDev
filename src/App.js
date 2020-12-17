@@ -23,8 +23,8 @@ const App = () => {
           <Route path="/about" component={About}></Route>
           <Route path="/contact-us" component={Contact}></Route>
           <Route path="/ourteam" component={Team}></Route>
-          <Route path="/userprofile" component={UserProfile}></Route>
-          <Route path="/userpro" component={User}></Route>
+          {/* <Route path="/userprofile" component={UserProfile}></Route> */}
+          <Route path="/userprofile" component={User}></Route>
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/search">
