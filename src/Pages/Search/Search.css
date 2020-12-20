@@ -1,19 +1,47 @@
-/* .main {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.searchForm {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
 }
-input {
-  border: 3px solid #32e17c;
-  height: 40px;
-  width: 300px;
-  border-radius: 50px;
-  padding: 0px 10px;
-} */
+
 .search-container {
   background-image: url(https://www.shutterstock.com/image-illustration/black-background-silhouettes-men-women-focus-1183433839);
   width: 100%;
   height: 100%;
   padding-top: 2px;
 }
+.cards {
+  width: 90%;
+  height: 70%;
+  padding-top: 40px;
+  padding-left: 80px;
+  display: flex;
+}
+
+.card2 {
+  display: inline-block;
+}
+.linkcontainer {
+  padding-top: 50px;
+  font-weight: bold;
+}
+.results-container {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.result-item {
+  position: relative;
+  padding: 16px;
+  border: 1px solid#898989;
+  margin: 16px;
+  text-align: center;
+  min-width: 200px;
+  box-shadow: 2px 2px 2px #898989;
+}
+/* .show {
+  display: inline-block;
+}
+.hide {
+  display: none;
+} */
