@@ -14,7 +14,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import UserProfile from "../UserProfile/UserPro";
+// import { setUserSession } from "../../utils/common";
+import { useSelector, connect } from "react-redux";
+import { fetchData, removeData } from "../../redux/user.actions";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -48,8 +51,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
+function SignIn(props) {
   const classes = useStyles();
+  const { fetchData } = props;
+  //const { userId } = useSelector((state) => state.FetchUserData);
   const history = useHistory();
   const [state, setState] = useState({
     email: "",
@@ -99,7 +104,12 @@ export default function SignIn(props) {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
+          // setUserSession(response.data.token, response.data.id);
+          console.log(response.data);
+          // <UserProfile />
           redirectToDashboard();
+
+          fetchData(response.data.id);
         }
         //setUserSession(response.data.token, response.data.user);
         // if (response.status === 200) {
@@ -130,7 +140,7 @@ export default function SignIn(props) {
   };
 
   const redirectToDashboard = () => {
-    history.push("/Dashboard");
+    history.push("/dashboard");
   };
 
   // const redirectToSignUp = () => {
@@ -206,6 +216,13 @@ export default function SignIn(props) {
     </Container>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchData: (value) => dispatch(fetchData(value)),
+  // removeData: (value) => dispatch(removeData(value)),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
 
 // import React, { useState } from "react";
 // //import { Modal, Button } from "react-materialize";

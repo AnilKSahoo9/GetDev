@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 // import AppBar from "@material-ui/core/AppBar";
 // import Button from "@material-ui/core/Button";
 // import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -19,8 +20,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Box from "@material-ui/core/Box";
-
+//import { getUser } from "../../utils/common";
 import Mahi from "../../assets/Mahi.jpg";
+// import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { fetchData, removeData } from "../../redux/user.actions";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -70,9 +75,14 @@ const useStyles = makeStyles((theme) => ({
 
 // const cards = [1];
 
-export default function User() {
+export default function UserProfile(props) {
   const classes = useStyles();
-  const data = {
+  // const { fetchData } = props;
+  const { userId } = useSelector((state) => state.fetchUserData);
+  // const location = useLocation();
+  const [data, setData] = useState(null);
+  console.log(userId);
+  const data1 = {
     //image: "hii",
     name: "Ankur Malhotra",
     emailId: "ankur@gmail.com",
@@ -83,21 +93,33 @@ export default function User() {
     githubUrl: "www.github.com/ankur",
     linkedinUrl: "www.linkedin.com/ankur",
     skills: ["Java", "JavaScript", "PHP", "MySQL", "Python", "C", "C++"],
-    projects: [
+    project: [
       {
-        name: "Fitness Tracking and Visualisation System",
-        description:
+        projectName: "Fitness Tracking and Visualisation System",
+        projectDesc:
           "This project is basically for fitness enthusiastic persons. Who loves to stay fit and healthy",
-      },
-      {
-        name: "Blood Donor Finder",
-        description:
-          "This a android project in which we can find different blood donors details by using respective blood group and location",
       },
     ],
   };
-
-  return (
+  // // const user = getUser();
+  // console.log(user);
+  useEffect(() => {
+    const fetchUserDetails = () => {
+      axios
+        .get(
+          `http://localhost:4000/api/users/${userId}`
+          //JSON.stringify(payload),
+          // userId
+        )
+        .then((res) => {
+          console.log(res.data.userDetails);
+          res.data.userDetails ? setData(res.data.userDetails) : setData(null);
+        })
+        .catch((err) => console.log(err));
+    };
+    userId && fetchUserDetails();
+  }, [userId]);
+  return data ? (
     <React.Fragment>
       <CssBaseline />
 
@@ -109,7 +131,7 @@ export default function User() {
                 <CardMedia
                   className={classes.cardMedia}
                   image={Mahi}
-                  title="Image title"
+                  title={data.name}
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography
@@ -140,7 +162,7 @@ export default function User() {
                     <TableBody>
                       <TableRow>
                         <TableCell>Email Id</TableCell>
-                        <TableCell>{data.emailId}</TableCell>
+                        <TableCell>{data.email}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>Gender</TableCell>
@@ -176,19 +198,19 @@ export default function User() {
                     <TableBody>
                       <TableRow>
                         <TableCell>Work Profile</TableCell>
-                        <TableCell>{data.workProfile}</TableCell>
+                        <TableCell>{data.work_profile}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>GitHub</TableCell>
-                        <TableCell>{data.githubUrl}</TableCell>
+                        <TableCell>{data.github}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>LinkedIn</TableCell>
-                        <TableCell>{data.linkedinUrl}</TableCell>
+                        <TableCell>{data.linkedin}</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>Skills</TableCell>
-                        <TableCell>{data.skills.join(", ")}</TableCell>
+                        <TableCell>{data.skill}</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -196,37 +218,39 @@ export default function User() {
               </Card>
             </Grid>
             {/* {cards.map((card) => ( */}
-            <Grid item xs={12}>
-              <Card className={classes.card} style={{ height: "300px" }}>
-                <CardContent className={classes.cardContent}>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="h2"
-                    align="left"
-                    className={classes.typography}
-                  >
-                    Project Details
-                  </Typography>
-                  <Table size="medium">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Description</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {data.projects.map((row) => (
-                        <TableRow key={row.name}>
-                          <TableCell>{row.name}</TableCell>
-                          <TableCell>{row.description}</TableCell>
+            {data.project ? (
+              <Grid item xs={12}>
+                <Card className={classes.card} style={{ height: "300px" }}>
+                  <CardContent className={classes.cardContent}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                      align="left"
+                      className={classes.typography}
+                    >
+                      Project Details
+                    </Typography>
+                    <Table size="medium">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Name</TableCell>
+                          <TableCell>Description</TableCell>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </Grid>
+                      </TableHead>
+                      <TableBody>
+                        {/* {data.projects.map((row) => ( */}
+                        <TableRow key={data1.project[0].projectName}>
+                          <TableCell>{data1.project[0].projectName}</TableCell>
+                          <TableCell>{data1.project[0].projectDesc}</TableCell>
+                        </TableRow>
+                        {/* ))} */}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ) : null}
             {/* ))} */}
           </Grid>
           <Box pt={4}>
@@ -235,5 +259,5 @@ export default function User() {
         </Container>
       </main>
     </React.Fragment>
-  );
+  ) : null;
 }

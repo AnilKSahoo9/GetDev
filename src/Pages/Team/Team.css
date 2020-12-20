@@ -49,7 +49,7 @@ nav ul li a {
 h1 {
   font-size: 60px;
 }
-p {
+p,h5 {
   font-size: 18px;
 }
 .card {
@@ -98,5 +98,6 @@ p {
   text-align: center;
   padding: 2px 16px;
   position: absolute;
-  top: 180px;
+  top: 156px;
+  
 }

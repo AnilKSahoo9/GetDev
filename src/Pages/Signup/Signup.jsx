@@ -21,7 +21,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import AddIcon from "@material-ui/icons/Add";
 //import Input from "@material-ui/core/Input";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-
+import qs from "qs";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -74,9 +74,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     marginTop: 8,
   },
-  input: {
-    textIndent: theme.spacing(2),
-  },
+  // input: {
+  //   textIndent: theme.spacing(0),
+  // },
 }));
 
 const ITEM_HEIGHT = 48;
@@ -128,7 +128,6 @@ export default function SignUp(props) {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    //age: "",
     gender: "",
     work_profile: "",
     bio: "",
@@ -141,7 +140,7 @@ export default function SignUp(props) {
     projectName: "",
     projectDesc: "",
   });
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const inputHandler = useCallback((event) => {
     event.persist();
     let name = event.target.name;
@@ -157,6 +156,9 @@ export default function SignUp(props) {
     setSkill(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
   const handleProjectChange =
     //useCallback(
     (event) => {
@@ -186,6 +188,16 @@ export default function SignUp(props) {
     //useCallback(() => {
     form.skill = skill;
     form.project = project;
+    form.avatar = selectedFile;
+    // Create an object of formData
+    // const formData = new FormData();
+    const formData = new FormData();
+    Object.keys(form).forEach((key) => {
+      formData.append(key, form[key]);
+    });
+
+    // // Update the formData object
+    // formData.append("form", form.skill);
     event.preventDefault();
     //alert("clicked");
     // if (Object.values(finalForm).includes(null)) {
@@ -194,62 +206,71 @@ export default function SignUp(props) {
     //   // console.log(finalForm);
     // } else {
     //alert("success");
-    //console.log(form);
-
-    axios
-      .post(`http://localhost:4000/api/users/signup`, form, {
-        header: {
-          "Content-type":
-            "application/json,application/x-www-form-urlencoded, charset=UTF-8",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.request.status === 201) {
-          Swal.fire({
-            icon: "success",
-            title: "",
-            text: "User registered successfully",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          //.then(() => (window.location = "/login"));
-        }
-        //alert("success");
-        // if(res.status === 201){
-        //   props.history.push("/signup");
-        // }
-        // else if(res.status === 500){
-        //   alert(" user already exists");
-        // }
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.request.status === 202) {
-          //alert("Account with this email already exists.");
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Signing up failed, please try again later",
-          });
-        }
-        if (err.response.request.status === 422) {
-          //alert("Account with this email already exists.");
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "User already exists, please Sign In instead",
-          });
-        }
-        if (err.response.request.status === 500) {
-          //alert("Account with this email already exists.");
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Can't create the account, try again after some time",
-          });
-        }
+    console.log(formData);
+    if (
+      Object.values(form).includes("") ||
+      Object.values(form).includes(null)
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Sorry, you missed to fill some details",
       });
+    } else {
+      axios
+        .post(`http://localhost:4000/api/users/signup`, formData, {
+          headers: {
+            "Content-type": "multipart/form-data; boundary={boundary string}",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.request.status === 201) {
+            Swal.fire({
+              icon: "success",
+              title: "",
+              text: "User registered successfully",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            //.then(() => (window.location = "/login"));
+          }
+          //alert("success");
+          // if(res.status === 201){
+          //   props.history.push("/signup");
+          // }
+          // else if(res.status === 500){
+          //   alert(" user already exists");
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.request.status === 202) {
+            //alert("Account with this email already exists.");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Signing up failed, please try again later",
+            });
+          }
+          if (err.response.request.status === 422) {
+            //alert("Account with this email already exists.");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "User already exists, please Sign In instead",
+            });
+          }
+          if (err.response.request.status === 500) {
+            //alert("Account with this email already exists.");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Can't create the account, try again after some time",
+            });
+          }
+        });
+    }
   };
 
   //console.log(skill);
@@ -273,6 +294,21 @@ export default function SignUp(props) {
         </Typography>
         <form className={classes.form}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="profilepic"
+                name="profileImage"
+                type="file"
+                variant="outlined"
+                required
+                fullWidth
+                autoFocus
+                id="profileImage"
+                label="Profile Photo"
+                // className={classes.input}
+                onChange={handleFileChange}
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
@@ -283,8 +319,7 @@ export default function SignUp(props) {
                 fullWidth
                 id="fullName"
                 label="Full Name"
-                autoFocus
-                className={classes.input}
+                // className={classes.input}
                 onChange={inputHandler}
               />
             </Grid>
@@ -457,6 +492,7 @@ export default function SignUp(props) {
                   <OutlinedInput labelWidth={50} name="members" id="members" />
                 }
                 MenuProps={MenuProps}
+                style={{ width: "340px" }}
               >
                 {skills.map((name) => (
                   <MenuItem

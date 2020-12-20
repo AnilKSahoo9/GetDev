@@ -10,12 +10,13 @@ body {
 }
 .container {
   background: white;
-  height: 95vh;
+  height: 100%;
   width: 95%;
   position: absolute;
-  top: 300px;
-  left: 50%;
+  top: 331px;
+  margin-left: 50%;
   transform: translate(-50%, -50%);
+  /* margin-bottom:100px */
 }
 .back {
   height: 100%;

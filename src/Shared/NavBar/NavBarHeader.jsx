@@ -9,7 +9,7 @@ import "./NavBarHeader.css";
 import {
   AppBar,
   Toolbar,
-  IconButton,
+  // IconButton,
   List,
   ListItem,
   ListItemText,
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
   navDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
+    marginLeft: 900,
   },
   linkText: {
     textDecoration: `none`,
@@ -48,19 +49,19 @@ const navLinks = [
 const afterLogin = [
   { title: `Dashboard`, path: `/dashboard` },
   { title: `Search Developers`, path: `/search` },
-  { title: `User Profile`, path: `/userprofile` },
+  { title: `My Profile`, path: `/userprofile` },
   { title: `Logout`, path: `/` },
 ];
 
 const NavBar = () => {
   const classes = useStyles();
-  // const location = useLocation();
   const history = useHistory();
+  const location = useLocation();
 
   let path =
-    history.location.pathname === "/dashboard" ||
-    history.location.pathname === "/search" ||
-    history.location.pathname === "/userprofile";
+    location.pathname === "/dashboard" ||
+    location.pathname === "/search" ||
+    location.pathname === "/userprofile";
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#006666" }}>
@@ -98,13 +99,14 @@ const NavBar = () => {
             aria-labelledby="main navigation"
             className={classes.navDisplayFlex}
           >
-            {navLinks.map(({ title, path }) => (
-              <NavLink to={path} key={title} className={classes.linkText}>
-                <ListItem button component={Link} to={path}>
-                  <ListItemText primary={title} />
-                </ListItem>
-              </NavLink>
-            ))}
+            {!path &&
+              navLinks.map(({ title, path }) => (
+                <NavLink to={path} key={title} className={classes.linkText}>
+                  <ListItem button to={path}>
+                    <ListItemText primary={title} />
+                  </ListItem>
+                </NavLink>
+              ))}
             {/* {path && (
               <ListItem onClick={() => history.push("/")}>
                 <ListItemText primary="SignOut" />
@@ -113,7 +115,7 @@ const NavBar = () => {
             {path &&
               afterLogin.map(({ title, path }) => (
                 <NavLink to={path} key={title} className={classes.linkText}>
-                  <ListItem button component={Link} to={path}>
+                  <ListItem button to={path}>
                     <ListItemText primary={title} />
                   </ListItem>
                 </NavLink>
