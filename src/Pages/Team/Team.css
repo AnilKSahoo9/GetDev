@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+.containerTeam {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url('../../images/Team.jpg');
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.navbar {
+  height: 12%;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 50px;
+  cursor: pointer;
+}
+nav {
+  flex: 1;
+  text-align: right;
+}
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-left: 60px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: wheat;
+  font-size: 12px;
+}
+.row {
+  display: flex;
+  height: 80%;
+  color: wheat;
+  padding: 20px;
+  align-items: center;
+}
+.col {
+  flex-basis: 50%;
+  margin: 50px;
+}
+h1 {
+  font-size: 60px;
+}
+p {
+  font-size: 18px;
+}
+.card {
+  width: 200px;
+  height: 230px;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 10px 15px;
+  background-position: top;
+  background-size: cover;
+  transition: transform 0.5s;
+}
+.card1 {
+  background-image: url('../../images/Anil.jpg');
+}
+.card2 {
+  background-image: url('../../images/Sweta.jpg');
+}
+.card3 {
+  background-image: url('../../images/Bhabani.jpg');
+}
+.card4 {
+  background-image: url('../../images/Rupa.jpg');
+}
+.card5 {
+  background-image: url('../../images/Aarti.jpg');
+}
+.card6 {
+  background-image: url('../../images/Pradeep.jpg');
+}
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover,
+.card5:hover,
+.card6:hover {
+  transform: translateY(-10px);
+}
+.Name {
+  background-color: wheat;
+  color: rgb(73, 70, 70);
+  text-align: center;
+  padding: 2px 16px;
+  position: absolute;
+  top: 180px;
+}
