@@ -1,13 +1,19 @@
 import React from "react";
 import "./Contact.css";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Swal from "sweetalert2";
+
 function Contact() {
   return (
     <div class="contact">
       <div class="content">
-        <h2>Contact Us</h2>
+        <h2>
+          <b>Contact Us</b>
+        </h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic omnis
-          suscipit laborum aspernatur{" "}
+          Hey Folks!! You can contact via these below details or you can drop
+          your details we will contact you{" "}
         </p>
       </div>
       <div class="container">
@@ -97,12 +103,69 @@ function Contact() {
         </div>
 
         <div class="location">
-          <img src="../../images/Map.jpg" alt="" width="40px" height="60px" />
+          {/* <img src="../../images/Map.jpg" alt="" width="40px" height="60px" /> */}
         </div>
 
-        {/* <div class="contactform">
-          <form></form>
-        </div> */}
+        <div class="contactform">
+          <form>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Email"
+              type="email"
+              id="password"
+              autoComplete="current-password"
+              // style={{ maxWidth: "40px" }}
+              // onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Name"
+              type="text"
+              id="password"
+              autoComplete="current-password"
+              // style={{ maxWidth: "40px" }}
+              // onChange={handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Mobile Number"
+              type="number"
+              id="password"
+              autoComplete="current-password"
+              // style={{ maxWidth: "40px" }}
+              // onChange={handleChange}
+            />
+            <Button
+              //type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ width: "80px" }}
+              // className={classes.submit}
+              // onClick={Swal.fire({
+              //   icon: "success",
+              //   title: "",
+              //   text: "User registered successfully",
+              //   showConfirmButton: false,
+              //   timer: 2000,
+              // })}
+            >
+              Submit
+            </Button>
+          </form>
+        </div>
       </div>
     </div>
   );

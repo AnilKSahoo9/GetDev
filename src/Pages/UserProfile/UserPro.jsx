@@ -22,6 +22,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Box from "@material-ui/core/Box";
 //import { getUser } from "../../utils/common";
 import Mahi from "../../assets/Mahi.jpg";
+import Smriti from "../../assets/Smriti.jpg";
+
 // import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { fetchData, removeData } from "../../redux/user.actions";
@@ -84,20 +86,19 @@ export default function UserProfile(props) {
   console.log(userId);
   const data1 = {
     //image: "hii",
-    name: "Ankur Malhotra",
-    emailId: "ankur@gmail.com",
-    gender: "Male",
-    bio: "Plant Lover,Bibliophile",
-    location: "Bhadrak,Odisha,India",
-    workProfile: "Frontend Developer",
-    githubUrl: "www.github.com/ankur",
-    linkedinUrl: "www.linkedin.com/ankur",
-    skills: ["Java", "JavaScript", "PHP", "MySQL", "Python", "C", "C++"],
+    // name: "Ankur Malhotra",
+    // emailId: "ankur@gmail.com",
+    // gender: "Male",
+    // bio: "Plant Lover,Bibliophile",
+    // location: "Bhadrak,Odisha,India",
+    // workProfile: "Frontend Developer",
+    // githubUrl: "www.github.com/ankur",
+    // linkedinUrl: "www.linkedin.com/ankur",
+    // skills: ["Java", "JavaScript", "PHP", "MySQL", "Python", "C", "C++"],
     project: [
       {
-        projectName: "Fitness Tracking and Visualisation System",
-        projectDesc:
-          "This project is basically for fitness enthusiastic persons. Who loves to stay fit and healthy",
+        projectName: "GetDev",
+        projectDesc: "where developers meet",
       },
     ],
   };
@@ -130,7 +131,14 @@ export default function UserProfile(props) {
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image={Mahi}
+                  image={
+                    Mahi
+                    // data.gender === "male"
+                    //   ? Mahi
+                    //   : data.gender === "female"
+                    //   ? Smriti
+                    //   : null
+                  }
                   title={data.name}
                 />
                 <CardContent className={classes.cardContent}>

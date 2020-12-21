@@ -24,6 +24,7 @@ body {
   background-image: url('../../images/AboutBG.jpg');
   background-size: cover;
   background-position: center;
+  /* margin-right:1000px */
 }
 .text {
   width: 60%;
